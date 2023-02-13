@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-final class Team: ObservableObject, Hashable {
+final class Team: ObservableObject, Hashable, Identifiable {
     
     let id = UUID()
     var name: String
-    var score = 0
+    @Published var score = 0
     
     init(name: String, score: Int = 0) {
         self.score = score

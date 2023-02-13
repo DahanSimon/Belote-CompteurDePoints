@@ -20,6 +20,17 @@ final class GameViewModel: ObservableObject {
         game.rounds.append(round)
     }
     
+    func deleteRound(game: Game, index: IndexSet) {
+//        game.rounds.remove(atOffsets: index)
+//        for round in game.rounds {
+//            guard let team1 = game.teams.first, let team2 = game.teams.last else {
+//                return
+//            }
+//            game.scores[team1]! += round.scores[team1] ?? 0
+//            game.scores[team2]! += round.scores[team2] ?? 0
+//        }
+    }
+    
     func resetGame(game: Game) {
         game.resetGame()
         

@@ -46,13 +46,13 @@ struct RoundDetailsView: View {
             }
             
             Section(header: Text("Equipe")) {
-                Picker("Equipe", selection: $viewModel.selectedTeam, content: {
+                Picker("Equipe", selection: $viewModel.announcingTeamIndex, content: {
                     ForEach(0 ..< viewModel.teams.count) {
                         Text(viewModel.teams[$0].name).tag($0)
                     }
                 })
-                .onChange(of: viewModel.selectedTeam) { selectedTeam in
-                    self.viewModel.selectedTeam = selectedTeam
+                .onChange(of: viewModel.announcingTeamIndex) { selectedTeam in
+                    self.viewModel.announcingTeamIndex = selectedTeam
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
@@ -84,8 +84,8 @@ struct RoundDetailsView: View {
                 }
             }
             
-            Section(header: Text("Score")) {
-                TextField("Score", text: $viewModel.score)
+            Section(header: Text("Points fait")) {
+                TextField("Points fait", text: $viewModel.pointsFait)
             }
             
             Section(header: Text("Résultat")) {

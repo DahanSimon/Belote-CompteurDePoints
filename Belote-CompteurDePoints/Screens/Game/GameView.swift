@@ -38,17 +38,13 @@ struct GameView: View {
                     .frame(height: 50)
                     
                     HStack(alignment: .bottom) {
-                        VStack {
-                            TeamTextField(teamName: $game.teams[0].name)
-                            Text(String(game.teams[0].score))
-                                .font(.title2)
-                                .foregroundColor(.white)
-                        }
-                        VStack {
-                            TeamTextField(teamName: $game.teams[1].name)
-                            Text(String(game.teams[1].score))
-                                .font(.title2)
-                                .foregroundColor(.white)
+                        ForEach(game.teams.indices) { index in
+                            VStack {
+                                TeamTextField(teamName: $game.teams[index].name)
+                                Text(String(game.teams[index].score))
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                     
@@ -69,6 +65,9 @@ struct GameView: View {
                             ForEach(game.rounds) { round in
                                 RoundListViewCell(round: round)
                                 
+                            }
+                            .onDelete { index in
+                                viewModel.deleteRound(game: game, index: index)
                             }
                         }
                         .scrollContentBackground(.hidden)
