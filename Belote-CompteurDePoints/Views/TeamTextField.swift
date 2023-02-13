@@ -13,6 +13,9 @@ struct TeamTextField: View {
     var body: some View {
         TextField("Team Name", text: $teamName, axis: .vertical)
             .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.white)
+            .frame(minHeight: 70.0,maxHeight: 70)
             .padding()
     }
 }

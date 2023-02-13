@@ -16,6 +16,16 @@
 		6B435B832993FCD500072591 /* Belote_CompteurDePointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435B822993FCD500072591 /* Belote_CompteurDePointsTests.swift */; };
 		6B435B8D2993FCD500072591 /* Belote_CompteurDePointsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435B8C2993FCD500072591 /* Belote_CompteurDePointsUITests.swift */; };
 		6B435B8F2993FCD500072591 /* Belote_CompteurDePointsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435B8E2993FCD500072591 /* Belote_CompteurDePointsUITestsLaunchTests.swift */; };
+		6B435B9C2996415700072591 /* GameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435B9B2996415700072591 /* GameListView.swift */; };
+		6B435BA0299646B500072591 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435B9F299646B500072591 /* Game.swift */; };
+		6B435BA2299646E900072591 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BA1299646E900072591 /* Team.swift */; };
+		6B435BA62996578500072591 /* TeamTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BA52996578500072591 /* TeamTextField.swift */; };
+		6B435BA829965A8C00072591 /* RoundListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BA729965A8C00072591 /* RoundListViewCell.swift */; };
+		6B435BAC2996654100072591 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BAB2996654100072591 /* GameView.swift */; };
+		6B435BAE2996659300072591 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BAD2996659300072591 /* GameViewModel.swift */; };
+		6B435BB0299667D700072591 /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BAF299667D700072591 /* Round.swift */; };
+		6B435BB32996863C00072591 /* RoundDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BB22996863C00072591 /* RoundDetailsView.swift */; };
+		6B435BB529992FBB00072591 /* RoundDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B435BB429992FBB00072591 /* RoundDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +59,16 @@
 		6B435B882993FCD500072591 /* Belote-CompteurDePointsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Belote-CompteurDePointsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B435B8C2993FCD500072591 /* Belote_CompteurDePointsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Belote_CompteurDePointsUITests.swift; sourceTree = "<group>"; };
 		6B435B8E2993FCD500072591 /* Belote_CompteurDePointsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Belote_CompteurDePointsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6B435B9B2996415700072591 /* GameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
+		6B435B9F299646B500072591 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		6B435BA1299646E900072591 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		6B435BA52996578500072591 /* TeamTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTextField.swift; sourceTree = "<group>"; };
+		6B435BA729965A8C00072591 /* RoundListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundListViewCell.swift; sourceTree = "<group>"; };
+		6B435BAB2996654100072591 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		6B435BAD2996659300072591 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		6B435BAF299667D700072591 /* Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
+		6B435BB22996863C00072591 /* RoundDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundDetailsView.swift; sourceTree = "<group>"; };
+		6B435BB429992FBB00072591 /* RoundDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +119,9 @@
 		6B435B6A2993FCD400072591 /* Belote-CompteurDePoints */ = {
 			isa = PBXGroup;
 			children = (
+				6B435BA92996651500072591 /* Screens */,
+				6B435B9E299646A700072591 /* Model */,
+				6B435B9D2996468800072591 /* Views */,
 				6B435B6B2993FCD400072591 /* Belote_CompteurDePointsApp.swift */,
 				6B435B6D2993FCD400072591 /* Persistence.swift */,
 				6B435B722993FCD400072591 /* ContentView.swift */,
@@ -133,6 +156,53 @@
 				6B435B8E2993FCD500072591 /* Belote_CompteurDePointsUITestsLaunchTests.swift */,
 			);
 			path = "Belote-CompteurDePointsUITests";
+			sourceTree = "<group>";
+		};
+		6B435B9D2996468800072591 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B435B9B2996415700072591 /* GameListView.swift */,
+				6B435BA52996578500072591 /* TeamTextField.swift */,
+				6B435BA729965A8C00072591 /* RoundListViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6B435B9E299646A700072591 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B435B9F299646B500072591 /* Game.swift */,
+				6B435BA1299646E900072591 /* Team.swift */,
+				6B435BAF299667D700072591 /* Round.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B435BA92996651500072591 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				6B435BB12996862800072591 /* RoundDetail */,
+				6B435BAA2996651C00072591 /* Game */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		6B435BAA2996651C00072591 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				6B435BAB2996654100072591 /* GameView.swift */,
+				6B435BAD2996659300072591 /* GameViewModel.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		6B435BB12996862800072591 /* RoundDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6B435BB22996863C00072591 /* RoundDetailsView.swift */,
+				6B435BB429992FBB00072591 /* RoundDetailsViewModel.swift */,
+			);
+			path = RoundDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +335,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B435BB529992FBB00072591 /* RoundDetailsViewModel.swift in Sources */,
+				6B435BB32996863C00072591 /* RoundDetailsView.swift in Sources */,
+				6B435BAE2996659300072591 /* GameViewModel.swift in Sources */,
+				6B435B9C2996415700072591 /* GameListView.swift in Sources */,
+				6B435BA0299646B500072591 /* Game.swift in Sources */,
+				6B435BA2299646E900072591 /* Team.swift in Sources */,
 				6B435B6C2993FCD400072591 /* Belote_CompteurDePointsApp.swift in Sources */,
+				6B435BAC2996654100072591 /* GameView.swift in Sources */,
 				6B435B712993FCD400072591 /* Belote_CompteurDePoints.xcdatamodeld in Sources */,
+				6B435BA62996578500072591 /* TeamTextField.swift in Sources */,
 				6B435B732993FCD400072591 /* ContentView.swift in Sources */,
+				6B435BB0299667D700072591 /* Round.swift in Sources */,
 				6B435B6E2993FCD400072591 /* Persistence.swift in Sources */,
+				6B435BA829965A8C00072591 /* RoundListViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +525,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "SimonDahan.Belote-CompteurDePoints";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -483,7 +565,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "SimonDahan.Belote-CompteurDePoints";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

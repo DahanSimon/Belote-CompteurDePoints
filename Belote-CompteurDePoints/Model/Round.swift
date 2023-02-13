@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Round: Identifiable {
+    let id = UUID()
+    let teams: [Team]
+    let scores: [Team: Int]
+}

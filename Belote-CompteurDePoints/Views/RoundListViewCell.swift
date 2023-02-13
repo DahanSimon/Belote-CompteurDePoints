@@ -13,11 +13,11 @@ struct RoundListViewCell: View {
     
     var body: some View {
         HStack {
-            Text(String(round.scores[0]))
+            Text(String(round.scores[round.teams.first!] ?? 0))
                 .multilineTextAlignment(.center)
                 .padding(.leading)
             Spacer()
-            Text(String(round.scores[1]))
+            Text(String(round.scores[round.teams.last!] ?? 0))
                 .multilineTextAlignment(.center)
                 .padding(.trailing)
         }
@@ -30,7 +30,7 @@ struct RoundListViewCell: View {
 
 struct RoundListView_Previews: PreviewProvider {
     static var previews: some View {
-        let teams = [Team(id: 1), Team(id: 2)]
-        RoundListViewCell(round: Round(id: 1, teams: teams, scores: [0, 0]))
+        let teams = [Team(name: "Nous"), Team(name: "Eux")]
+        RoundListViewCell(round: Round(teams: teams, scores: [:]))
     }
 }

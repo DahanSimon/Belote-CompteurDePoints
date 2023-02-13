@@ -6,3 +6,22 @@
 //
 
 import Foundation
+import SwiftUI
+
+final class GameViewModel: ObservableObject {
+    
+    let team1 = Team(name: "Nous")
+    let team2 = Team(name: "Eux")
+    
+    
+    @Published var isShowingRoundDetailView = false
+    
+    func addRound(game: Game, round: Round) {
+        game.rounds.append(round)
+    }
+    
+    func resetGame(game: Game) {
+        game.resetGame()
+        
+    }
+}

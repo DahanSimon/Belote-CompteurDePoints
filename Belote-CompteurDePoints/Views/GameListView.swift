@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct GameListView: View {
+    
     var body: some View {
-        
+                
         VStack() {
             HStack {
                 VStack {
@@ -37,7 +38,6 @@ struct GameListView: View {
         .background(Color.gray)
         .font(.system(size: 20, weight: .bold, design: .default))
         .cornerRadius(15.0)
-        
     }
 }
 
