@@ -19,8 +19,9 @@ class Game: Identifiable, ObservableObject {
     }
     
     func resetGame() {
+        let teams = [Team(name: "Nous"), Team(name: "Eux")]
         id = UUID()
-        teams = []
+        self.teams = teams
         rounds = []
     }
 }

@@ -11,9 +11,10 @@ import SwiftUI
 
 struct RoundDetailsView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: RoundDetailsViewModel
     @EnvironmentObject var game: Game
-    @Environment(\.presentationMode) var presentationMode
+    
     
     var body: some View {
         Form {

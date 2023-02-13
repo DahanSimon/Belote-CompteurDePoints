@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    var game = Game(teams: [Team(name: "Nous"), Team(name: "eux")])
+    var game = Game(teams: [Team(name: "Nous"), Team(name: "Eux")])
     var body: some View {
         GameView().environmentObject(game)
     }
