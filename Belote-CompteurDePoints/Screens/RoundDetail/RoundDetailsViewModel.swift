@@ -13,27 +13,21 @@ class RoundDetailsViewModel: ObservableObject {
     var teams: [Team]
     let colors = ["♠️", "♥️", "♦️", "♣️"]
     var scores: [Team: Int] = [:]
-    var newRound: Round?
+    @Published var currentRound: Round
     var game: Game
     
-    @Published var announcingTeamIndex = 0
-    @Published var selectedColor = 0
-    @Published var annonce = ""
-    @Published var belote = false
-    @Published var beloteBeneficiary = 0
-    @Published var contree = false
-    @Published var surContree = false
-    @Published var pointsFait = ""
+    
     @Published var showColorPicker = false
     
     
-    init(game: Game) {
+    init(game: Game, round: Round) {
         self.teams = game.teams
         self.game = game
+        self.currentRound = round
     }
     
     var penalties: Int {
-        return 160 + (contree ? 160 : 0) + (contree && surContree ? 160 : 0)
+        return 160 + (currentRound.contree ? 160 : 0) + (currentRound.contree && currentRound.surContree ? 160 : 0)
     }
     
     var result: String {
@@ -41,15 +35,15 @@ class RoundDetailsViewModel: ObservableObject {
             return team.name
         })
         
-        guard let score = Int(pointsFait) as? Int , let annonce = Int(annonce) as? Int else {
+        guard let score = Int(currentRound.pointsFait) as? Int , let annonce = Int(currentRound.annonce) as? Int else {
             return "Une erreur c'est produite"
         }
         
         if score < annonce {
-            return "L'équipe \(teamNames[announcingTeamIndex]) a perdu"
+            return "L'équipe \(teamNames[currentRound.announcingTeamIndex]) a perdu"
         }
         
-        return "L'équipe \(teamNames[announcingTeamIndex]) a gagné et l'équipe \(teamNames[beloteBeneficiary]) benefice de 20 points supplementaire"
+        return "L'équipe \(teamNames[currentRound.announcingTeamIndex]) a gagné et l'équipe \(teamNames[currentRound.beloteBeneficiary]) benefice de 20 points supplementaire"
     }
     
     func addRound(callback: @escaping ((Bool) -> Void)) {
@@ -58,31 +52,41 @@ class RoundDetailsViewModel: ObservableObject {
             return
         }
         
-        let scores = getScores()
-        let round = Round(teams: game.teams, scores: scores!)
-        game.rounds.append(round)
-        game.scores[team1]! += scores![team1]!
-        game.scores[team2]! += scores![team2]!
+        let scores = getScores()!
+        currentRound.scores = scores
+        var i = 0
+        var alreadyExist = false
+        for round in game.rounds {
+            if round.id == currentRound.id {
+                game.rounds[i] = currentRound
+                alreadyExist = true
+            }
+            i+=1
+        }
+        if !alreadyExist {
+            game.rounds.append(currentRound)
+        }
+        team1.score += scores[team1]!
+        team2.score += scores[team2]!
         callback(true)
     }
     
     func getScores() -> [Team: Int]? {
         var scores: [Team: Int] = [:]
-        let opponentTeam: Team = teams.first { $0.id != teams[announcingTeamIndex].id }!
+        let opponentTeam: Team = teams.first { $0.id != teams[currentRound.announcingTeamIndex].id }!
 
-        guard let pointsFait = Int(pointsFait), let annonce = Int(annonce) else {
+        guard let pointsFait = Int(currentRound.pointsFait), let annonce = Int(currentRound.annonce) else {
             return nil
         }
         
         if pointsFait < annonce {
-            scores[game.teams[announcingTeamIndex]] = 0
+            scores[game.teams[currentRound.announcingTeamIndex]] = 0
             scores[opponentTeam] = annonce + penalties
         } else if pointsFait > annonce {
             let pointsFaitOpponent = 162 - pointsFait
-            scores[game.teams[announcingTeamIndex]] = pointsFait + annonce
+            scores[game.teams[currentRound.announcingTeamIndex]] = pointsFait + annonce
             scores[opponentTeam] = 10 * Int(round(Double((pointsFaitOpponent + 5) / 10)))
         }
-        
         return scores
     }
 }

@@ -41,7 +41,7 @@ struct GameView: View {
                         ForEach(game.teams.indices) { index in
                             VStack {
                                 TeamTextField(teamName: $game.teams[index].name)
-                                Text(String(game.teams[index].score))
+                                Text(String(game.scores[game.teams[index]] ?? 0))
                                     .font(.title2)
                                     .foregroundColor(.white)
                             }
@@ -49,7 +49,8 @@ struct GameView: View {
                     }
                     
                     NavigationLink {
-                        RoundDetailsView(viewModel: RoundDetailsViewModel(game: game)).environmentObject(game)
+                        let scores = [game.teams.first! : 0, game.teams.last! : 0]
+                        RoundDetailsView(viewModel: RoundDetailsViewModel(game: game, round: Round(teams: game.teams, scores: scores))).environmentObject(game)
                     } label: {
                         HStack {
                             Image(systemName: "plus.circle")
@@ -63,8 +64,11 @@ struct GameView: View {
                     if !game.rounds.isEmpty {
                         List {
                             ForEach(game.rounds) { round in
-                                RoundListViewCell(round: round)
-                                
+                                NavigationLink {
+                                    RoundDetailsView(viewModel: RoundDetailsViewModel(game: game, round: round)).environmentObject(game)
+                                } label: {
+                                    RoundListViewCell(round: round)
+                                }
                             }
                             .onDelete { index in
                                 viewModel.deleteRound(game: game, index: index)

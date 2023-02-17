@@ -9,9 +9,24 @@ import Foundation
 import SwiftUI
 
 class Game: Identifiable, ObservableObject {
+    
     var id = UUID()
     @Published var teams: [Team]
     @Published var rounds: [Round] = []
+    
+    var scores: [Team: Int] {
+        var tempScores: [Team: Int] = [:]
+        
+        for team in teams {
+            tempScores[team] = 0
+        }
+        for round in rounds {
+            for team in teams {
+                tempScores[team]! += round.scores[team] ?? 0
+            }
+        }
+        return tempScores
+    }
     
     init(teams: [Team], rounds: [Round] = []) {
         self.teams = teams
@@ -24,4 +39,5 @@ class Game: Identifiable, ObservableObject {
         self.teams = teams
         rounds = []
     }
+    
 }
