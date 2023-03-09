@@ -119,6 +119,7 @@
 		6B435B6A2993FCD400072591 /* Belote-CompteurDePoints */ = {
 			isa = PBXGroup;
 			children = (
+				6B5A19FA29BA8F6D0046EEF2 /* Extensions */,
 				6B435BA92996651500072591 /* Screens */,
 				6B435B9E299646A700072591 /* Model */,
 				6B435B9D2996468800072591 /* Views */,
@@ -203,6 +204,13 @@
 				6B435BB429992FBB00072591 /* RoundDetailsViewModel.swift */,
 			);
 			path = RoundDetail;
+			sourceTree = "<group>";
+		};
+		6B5A19FA29BA8F6D0046EEF2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

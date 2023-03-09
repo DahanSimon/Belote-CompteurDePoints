@@ -67,7 +67,7 @@ struct GameView: View {
                                 NavigationLink {
                                     RoundDetailsView(viewModel: RoundDetailsViewModel(game: game, round: round)).environmentObject(game)
                                 } label: {
-                                    RoundListViewCell(round: round)
+                                    RoundListViewCell(roundID: round.id).environmentObject(game)
                                 }
                             }
                             .onDelete { index in
