@@ -47,6 +47,7 @@ class RoundDetailsViewModel: ObservableObject {
     }
     
     func addRound(callback: @escaping ((Bool) -> Void)) {
+        
         guard let team1 = game.teams.first, let team2 = game.teams.last else {
             callback(false)
             return
@@ -54,20 +55,16 @@ class RoundDetailsViewModel: ObservableObject {
         
         let scores = getScores()!
         currentRound.scores = scores
-        var i = 0
-        var alreadyExist = false
-        for round in game.rounds {
-            if round.id == currentRound.id {
-                game.rounds[i] = currentRound
-                alreadyExist = true
-            }
-            i+=1
-        }
-        if !alreadyExist {
-            game.rounds.append(currentRound)
-        }
         team1.score += scores[team1]!
         team2.score += scores[team2]!
+        
+        if let index = game.rounds.firstIndex(where: { $0.id == currentRound.id }) {
+            game.rounds[index] = currentRound
+            callback(true)
+            return
+        }
+        
+        game.rounds.append(currentRound)
         callback(true)
     }
     
