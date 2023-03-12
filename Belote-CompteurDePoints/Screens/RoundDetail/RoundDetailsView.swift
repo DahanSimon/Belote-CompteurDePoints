@@ -20,6 +20,9 @@ struct RoundDetailsView: View {
             Section(header: Text("Annonce")) {
                 HStack {
                     TextField("Annonce", text: $viewModel.currentRound.annonce)
+                    Toggle(isOn: $viewModel.currentRound.capotAnnounced) {
+                        Text("Capot ?")
+                    }
                     Button(action: {
                         self.viewModel.showColorPicker.toggle()
                     }) {
@@ -84,7 +87,12 @@ struct RoundDetailsView: View {
             }
             
             Section(header: Text("Points fait")) {
-                TextField("Points fait", text: $viewModel.currentRound.pointsFait)
+                HStack {
+                    TextField("Points fait", text: $viewModel.currentRound.pointsFait)
+                    Toggle(isOn: $viewModel.currentRound.capot) {
+                        Text("Capot ?")
+                    }
+                }
             }
             
             Section(header: Text("Résultat")) {

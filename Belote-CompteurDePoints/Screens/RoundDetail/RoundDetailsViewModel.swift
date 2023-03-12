@@ -27,7 +27,7 @@ class RoundDetailsViewModel: ObservableObject {
     }
     
     var penalties: Int {
-        return 160 + (currentRound.contree ? 160 : 0) + (currentRound.contree && currentRound.surContree ? 160 : 0)
+        return currentRound.contree ? 160 : 0
     }
     
     var result: String {
@@ -71,19 +71,109 @@ class RoundDetailsViewModel: ObservableObject {
     func getScores() -> [Team: Int]? {
         var scores: [Team: Int] = [:]
         let opponentTeam: Team = teams.first { $0.id != teams[currentRound.announcingTeamIndex].id }!
+        let announcingTeam: Team = game.teams[currentRound.announcingTeamIndex]
 
         guard let pointsFait = Int(currentRound.pointsFait), let annonce = Int(currentRound.annonce) else {
             return nil
         }
         
-        if pointsFait < annonce {
-            scores[game.teams[currentRound.announcingTeamIndex]] = 0
-            scores[opponentTeam] = annonce + penalties
-        } else if pointsFait > annonce {
-            let pointsFaitOpponent = 162 - pointsFait
-            scores[game.teams[currentRound.announcingTeamIndex]] = pointsFait + annonce
-            scores[opponentTeam] = 10 * Int(round(Double((pointsFaitOpponent + 5) / 10)))
+        if currentRound.capot {
+            scores[announcingTeam] = (currentRound.capotAnnounced ? 500 : (250 + annonce))
+            scores[opponentTeam] = 0
+        } else if currentRound.capotAnnounced {
+            scores[announcingTeam] = 0
+            scores[opponentTeam] = currentRound.capotAnnounced ? 500 : (250 + annonce)
         }
+        
+        if pointsFait < annonce {
+            scores[announcingTeam] = 0
+            scores[opponentTeam] = (annonce + penalties) * (currentRound.surContree ? 2 : 1)
+        } else if pointsFait >= annonce {
+            if currentRound.contree {
+                scores[opponentTeam] = 0
+                scores[announcingTeam] = (annonce + penalties) * (currentRound.surContree ? 2 : 1)
+            } else {
+                scores[announcingTeam] = pointsFait + annonce
+                let pointsFaitOpponent = 162 - pointsFait
+                scores[opponentTeam] = 10 * Int(round(Double((pointsFaitOpponent + 5) / 10)))
+            }
+        }
+        
         return scores
     }
 }
+
+func calculerPointsBeloteCoinchee(pointFait: Int, pointAnnonce: Int, contree: Bool = false, surcontree: Bool = false, capot: Bool = false, chute: Bool = false) -> (Int, Int) {
+    var pointsAnnonceur = 0
+    var pointsDefenseur = 0
+
+    // Calcul des points de contrat
+    if capot {
+        if pointFait == 162 {
+            pointsAnnonceur += 500
+        } else {
+            if pointAnnonce == 0 {
+                pointsDefenseur += 500
+            } else {
+                pointsDefenseur += 162
+            }
+        }
+    } else {
+        if pointFait >= pointAnnonce {
+            if contree {
+                let points = (pointAnnonce + 160) * (surcontree ? 4 : 2)
+                pointsAnnonceur += points
+            } else {
+                pointsAnnonceur += pointAnnonce + pointFait - 162
+            }
+        } else {
+            if contree {
+                let points = (pointAnnonce + 160) * (surcontree ? 4 : 2)
+                pointsDefenseur += points
+            } else {
+                pointsDefenseur += pointAnnonce + 160
+            }
+        }
+    }
+
+    return (pointsAnnonceur, pointsDefenseur)
+}
+
+
+/*
+ Cas 1 : point fait >= point annonce
+         point annonceur = points fait + point annonce
+         point defenseur = point fait - 162
+
+ Cas 2 : point fait < point annonce
+         point annonceur = 0
+         point defenseur = point anonce + 160
+
+ Cas 3 : Cas 1 contree
+         point annonceur = (point annonce + 160) * 2
+         point defenseur = 0
+
+ Cas 4 : Cas 2 contree
+         point annonceur = 0
+         point defenseur = (point annonce + 160) * 2
+ 
+ Cas 5 : Capot annonce fait
+         point annonceur = 500
+         point defenseur = 0
+ 
+ Cas 5 : Capot annonce chute
+         point annonceur = 0
+         point defenseur = 500
+ 
+ Cas 6 : Capot non annonce fait
+         point annonceur = point anonce + 250
+         point defenseur = 0
+ 
+ Cas 7 : Capot annonce contree (surcontree) chute
+         point annonceur = 0
+         point defenseur = 1000 ( 2000 si sur contree )
+ 
+ Cas 8 : Capot annonce contree (surcontree) fait
+         point annonceur = 1000 ( 2000 si sur contree )
+         point defenseur = 0
+ */

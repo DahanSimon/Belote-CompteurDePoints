@@ -15,6 +15,8 @@ class Round: Identifiable {
     @Published var selectedColor = 0
     @Published var annonce = ""
     @Published var belote = false
+    @Published var capot = false
+    @Published var capotAnnounced = false
     @Published var beloteBeneficiary = 0
     @Published var contree = false
     @Published var surContree = false
